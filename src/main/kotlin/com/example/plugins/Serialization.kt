@@ -19,7 +19,7 @@ fun Application.configureSerialization() {
     }
     routing {
         post("/notifyTodayTaskFinished") {
-            val dir = File("/home/blogger")
+            val dir = File("/home/blogger/teacher")
             if (!dir.exists()) dir.mkdirs()
             val file = File(dir, "teacherLog")
             if (!file.exists()) file.createNewFile()
@@ -28,6 +28,7 @@ fun Application.configureSerialization() {
             val dateString = simpleDateFormat.format(Date())
             fileWriter.append("$dateString\n")
             fileWriter.close()
+            Runtime.getRuntime().exec("/home/blogger/teacher/scripts/success.sh")
             call.respond(mapOf("result" to "success"))
         }
     }
