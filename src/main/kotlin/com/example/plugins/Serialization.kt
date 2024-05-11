@@ -28,7 +28,8 @@ fun Application.configureSerialization() {
             val dateString = simpleDateFormat.format(Date())
             fileWriter.append("$dateString\n")
             fileWriter.close()
-            Runtime.getRuntime().exec("/home/blogger/teacher/scripts/success.sh")
+            val scriptPath = "/home/blogger/teacher/scripts/success.sh"
+            Runtime.getRuntime().exec("su -c $scriptPath blogger")
             call.respond(mapOf("result" to "success"))
         }
     }
